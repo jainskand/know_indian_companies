@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from . import scrap
 from django.http import HttpResponse,Http404
 from django.views.generic import View,TemplateView,ListView,DetailView,CreateView
-from .forms import SearchCompanies
+from .forms import SearchCompanies,PreviousData
 from django import forms
 from datetime import datetime
 # Create your views here.
@@ -15,15 +15,22 @@ def companyPage(request,cin,uid=None):
 
     #cin=slug
     #c = get_object_or_404(CinModel, CIN=cin)
+    form = PreviousData()
+    if request.method=='POST':
+        form = PreviousData(request.POST)
+        if form.is_valid():
+            sel = form.cleaned_data['previuos']
+            print(sel)
+
     if uid!=None:
         c = get_object_or_404(UserSearches, pk=uid)
         if c.user!=request.user:
             raise Http404("Not authenticated")
         c=c.companySearched
     else:
-        get_object_or_404(CinModel, CIN=cin)
-        c = CinModel.objects.filter(CIN=cin).order_by('create_date')[0]
-
+        #get_object_or_404(CinModel, CIN=cin)
+        comlis = CinModel.objects.filter(CIN=cin).order_by('create_date')
+        c = comlis[0]
         cc = UserSearches(CIN=cin,user=request.user,companySearched=c)
         cc.save()
 
@@ -37,6 +44,7 @@ def companyPage(request,cin,uid=None):
     context={
         'type' : c.type,
         'companydata' : companydata ,
+        'form' : form,
     }
 
     return render(request,'companies/companydetail.html',context=context)

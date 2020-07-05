@@ -3,14 +3,17 @@
 
 {% block content %}
 {% load my_extras %}
-  <div class="container">
+  <div class="container ">
     {% if allsearches %}
-      <h2>Your all recent searches</h2>
-      <ol>
+      <h3>Your all recent searches</h3>
+      <div class="list-group">
         {% for sear in allsearches %}
-          <h4><li><a href="{% url 'companies:companydetails' cin=sear.CIN uid=sear.id %}">{{ sear.CIN}}  :   {{ sear.create_date }}</a></li></h4>
+          <a class="list-group-item" href="{% url 'companies:companydetails' cin=sear.CIN uid=sear.id %}">{{ sear.CIN}}  :   {{ sear.create_date }}</a>
         {% endfor %}
-      </ol>
+      </div>
+
+
+
     {% else %}
       <h2>No recent searches</h2>
     {% endif %}

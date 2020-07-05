@@ -1,11 +1,16 @@
 from django import template
-
+from datetime import datetime
 register =  template.Library()
 
-@register.filter(name = 'parsedate')
-def cut(value):
-    print(value,type(value))
-    d = str(value).split(' ')
-    return ''.join(d)
-
+@register.filter(name = 'parsedata')
+def parsedata(value):
+    if value==None:
+        return ''
+    return value
 #register.filter('cuting',cut)
+
+@register.filter(name = 'parsedate')
+def parsedate(value):
+    if value==None:
+        return ''
+    return value.strftime("%d/%m/%Y")

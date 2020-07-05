@@ -13,3 +13,6 @@ class SearchCompanies(forms.Form):
             if msg!="success":
                 raise forms.ValidationError(msg)
         return cin
+
+class PreviousData(forms.Form):
+    previuos = forms.ChoiceField()

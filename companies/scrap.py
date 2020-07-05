@@ -16,7 +16,8 @@ def getDetails(cin):
                                 "Referer": "http://www.mca.gov.in/"})
     #print(variable2)
     #print(session.cookies)
-
+    if variable2.status_code!=200:
+        return 'connection error'
     url = "http://www.mca.gov.in/mcafoportal/companyLLPMasterData.do"
     myobj = {'companyName': '','companyID': cin,
              'displayCaptcha': 'false',
@@ -37,6 +38,9 @@ def getDetails(cin):
             }
 
     final_request = session.post(url=url,headers=header,data=myobj)
+
+    if final_request.status_code!=200:
+        return 'connection error'
     #print(final_request.text)
     #f = open("myfile.txt", "w")
     #f.write(final_request.text)
@@ -132,7 +136,7 @@ def getCharges():
                 chargeslist.append(None)
             else:
                 chargeslist.append(i.text or None)
-        if chargeslist[0] != ' ' or chargeslist[0] !=None:
+        if chargeslist[0] !=None:
             prevname = chargeslist[0]
         else:
             chargeslist[0]=prevname
@@ -175,6 +179,8 @@ def getType():
 
 def getalldata(cin):
     response = getDetails(cin)
+    if response == 'connection error':
+        return 'connection error'
     global soup
     soup=BeautifulSoup(response,'html.parser')
     CinNotFoundError = soup.find("div", {"id": "msg_overlay"})
@@ -187,8 +193,8 @@ def getalldata(cin):
     #getDirectors()
 
 
-getalldata('F04662')
-print(getCharges())
+#getalldata('U01132WB1996PTC168244')
+#print(*getCharges(),sep='\n')
 
 #print(CinNotFoundError['style'])
 #invalidCinError = soup.find("div", {"id": "alertmsg_overlay"})
