@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>CompanyData</title>
+      <!-- Bootstrap -->
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+        <!-- Minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <!-- Optional Theme -->
+
+      <!-- Medium Style Editor -->
+        <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+      <!-- Custom CSS
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">-->
+      <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Russo+One&display=swap" rel="stylesheet">
+  </head>
+  <body class='loader'>
+
+    <!-- NAVBAR -->
+    <nav class='navbar navbar-default techfont custom-navbar'>
+      <div class="container">
+        <ul class='nav navbar-nav'>
+          <li><a class='navbar-brand bigbrand' href="{% url 'home_page' %}">HOME</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'companies:searchpage' %}">Search Company</a></li>
+          {% endif %}
+          <li><a href="#">About</a></li>
+          <!-- <li><a href="https://www.github.com">Github</a></li>
+          <li><a href="https://www.linkedin.com/in/skand-jain-7847731a5/">Linkedin</a></li>-->
+        </ul>
+        <ul class='nav navbar-nav navbar-right'>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'companies:recentsearches' %}">Recent</a></li>
+            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+            <li><a >Welcome: {{user.username}}</a></li>
+          {% else %}
+            <li><a href="{% url 'accounts:signup' %}">Register</a></li>
+            <li><a class='nav navbar-right' href="{% url 'accounts:login' %}"><span class='glyphicon glyphicon-user'></span></a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- CONTENT BLOCK -->
+    <div class="content container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+  <div class="container">
+    {% if type == "company" %}
+    <h1>{{companydata.CompanyName}}</h1>
+    <div id="companyMasterData" name="companyMasterData">
+      <table class="">
+        <tr>
+          <td width="45%">CIN&nbsp;</td>
+          <td width="55%">{{companydata.CIN}}</td>
+        </tr>
+        <tr>
+          <td>Company Name</td>None
+          <td>{{companydata.CompanyName}}</td>
+        </tr>
+        <tr>
+          <td>ROC Code</td>
+          <td>{{companydata.ROCCode}}</td>
+        </tr>
+        <tr>
+          <td> Registration Number</td>
+          <td>{{companydata.RegistrationNumber}}</td>
+        </tr>None
+        <tr>
+          <td> Company Category</td>
+          <td>{{companydata.CompanyCategory}}</td>
+        </tr>
+        <tr>
+          <td> Company SubCategory</td>
+          <td>{{companydata.CompanySubCategory}}</td>
+        </tr>
+        <tr>
+          <td> Class of Company </td>None
+          <td>{{companydata.ClassofCompany}}</td>
+        </tr>
+        <tr>
+          <td>Authorised Capital(Rs)</td>
+          <td>{{companydata.AuthorisedCapital}}</td>
+        </tr>
+        <tr>
+          <td>Paid up Capital(Rs)</td>
+          <td>{{companydata.PaidupCapital}}</td>
+        </tr>None
+        <tr>
+          <td>Number of Members(Applicable in case of company without Share Capital)</td>
+          <td>{{companydata.NumberofMembers}}</td>
+        </tr>
+        <tr>
+          <td> Date of Incorporation</td>
+          <td>{{companydata.DateofIncorporation}}</td>
+        </tr>
+        <tr>
+          <td> Registered Address
+          <td>{{companydata.RegisteredAddress}}</td>
+        </tr>
+        <tr>
+          <td>Address other than R/o where all or any books of account and papers are maintained</td>
+          <td>{{companydata.AddressotherthanRo}}</td>
+        </tr>
+        <tr>
+          <td>Email Id</td>
+          <td>{{companydata.EmailId}}</td>
+        </tr>
+        <tr>
+          <td>Whether Listed or not</td>
+          <td>{{companydata.WhetherListed}}</td>
+        </tr>
+        <tr>
+          <td>ACTIVE compliance</td>
+          <td>{{companydata.ACTIVEcompliance}}</td>
+        </tr>None
+        <tr>
+          <td>Suspended at stock exchange</td>
+          <td>{{companydata.Suspendedatstockexchange}}</td>
+        </tr>
+        <tr>
+          <td> Date of last AGM</td>
+          <td>{{companydata.DateoflastAGM}}</td>
+        </tr>
+        <tr>
+          <td> Date of Balance Sheet</td>
+          <td>{{companydata.DateofBalanceSheet}}</td>
+        </tr>
+        <tr>
+          <td> Company Status(for efiling)</td>
+          <td>{{companydata.CompanyStatus}}</td>
+        </tr>
+      </table>
+    </div>
+
+
+    {% elif type == "llp" %}
+    <div id="llpMasterData" name="llpMasterData">
+      <h1>{{companydata.LLPName}}</h1>
+	     <table class="result-forms" width="100%" id="resultTab3" name="resultTab3">
+	        <tr>
+              <td>LLPIN&nbsp;</td>
+		          <td>{{companydata.LLPIN}}</td>
+          </tr>
+          <tr>
+              <td>LLP Name</td>
+              <td>{{companydata.LLPName}}</td>
+          </tr>
+	        <tr>
+   		        <td>Number of Partners</td>
+              <td >{{companydata.NumberofPartners}}</td>
+          </tr>
+          <tr>
+             <td>Number of Designated Partners</td>
+             <td>{{companydata.NumberofDesignatedPartners}}</td>
+          </tr>
+          <tr>
+             <td>ROC Code</td>
+             <td>{{companydata.ROCCode}}</td>
+		      </tr>
+		      <tr>
+			       <td> Date of Incorporation</td>
+			       <td>{{companydata.DateofIncorporation}}</td>
+		      </tr>
+		      <tr>
+			       <td> Registered Address</td>
+			       <td>{{companydata.RegisteredAddress}}</td>
+		      </tr>
+		      <tr>
+			       <td>Email Id</td>
+			       <td>{{companydata.EmailId}}</td>
+		      </tr>
+		      <tr>
+			       <td>Previous firm/ company details, if applicable</td>
+			       <td>{{companydata.Previousfirm}}</td>
+		      </tr>
+		      <tr>
+			       <td>Total Obligation of Contribution</td>
+			       <td width="59%">{{companydata.TotalObligationofContribution}}</td>
+		      </tr>
+		      <tr>
+			       <td>Main division of business activity to be carried out in India </td>
+			       <td width="59%">{{companydata.MaindivisionofbusinessactivityinIndia}}</td>
+		     </tr>
+		     <tr>
+			       <td>Description of main division</td>
+			       <td width="59%">{{companydata.Descriptionofmaindivision}}</td>
+		     </tr>
+		     <tr>
+			       <td>Date of last financial year end date for which Statement of Accounts and Solvency filed</td>
+			       <td width="59%">{{companydata.DateofAccountsSolvencyfiled}}</td>
+		    </tr>
+		     <tr>
+		         <td>Date of last financial year end date for which Annual Return filed</td>
+		         <td width="59%">{{companydata.DateofAnnualReturnfiled}}</td>
+		   </tr>
+		    <tr>
+			       <td> LLP Status</td>
+			       <td width="59%">{{companydata.LLPStatus}}</td>
+	 	   </tr>
+	   </table>
+    <br/>
+    </div>
+
+    {% elif type == "foreigncompany" %}
+
+    <div id="foreignCompanyMasterData" name="foreignCompanyMasterData">
+        <h1>{{companydata.CompanyName}}</h1>
+        <table class="result-forms" id="resultTab2" name="resultTab2">
+	          <tr>
+               <td>FCRN&nbsp;</td>
+		           <td>{{companydata.FCRN}}</td>
+            </tr>
+             <tr>
+               <td>Company Name</td>
+               <td>{{companydata.CompanyName}}</td>
+            </tr>
+				     <tr>
+			 	       <td> Date of Incorporation</td>
+				       <td>{{companydata.DateofIncorporation}}</td>
+				    </tr>
+				     <tr>
+  				     <td>Country of Incorporation </td>
+				       <td>{{companydata.CountryofIncorporation}}</td>
+				    </tr>
+				     <tr>
+				       <td> Registered Address</td>
+				       <td>{{companydata.RegisteredAddress}}</td>
+			    	</tr>
+				     <tr>
+				       <td>Email Id</td>
+				       <td>{{companydata.EmailId}}</td>
+				    </tr>
+				     <tr>
+				       <td> Foreign Company with Share Capital</td>
+				       <td>{{companydata.ForeignCompanywithShareCapital}} </td>
+				    </tr>
+				    <tr>
+				       <td> Company Status</td>
+				       <td>{{companydata.CompanyStatus}}</td>
+	 		     </tr>
+          <tr>
+			        <td> Type of Office</td>
+				      <td>{{companydata.TypeofOffice}}</td>
+			   </tr>
+			    <tr>
+				      <td> Details</td>
+				      <td>{{companydata.Details}}</td>
+			   </tr>
+			   <tr>
+				      <td>Main division of business activity to be carried out in India </td>
+				      <td width="59%">{{companydata.MaindivisioninIndia}}</td>
+			  </tr>
+			  <tr>
+				      <td id="NatureOfBusiness_lbl" align='left' > Description of main division</td>
+				      <td width="59%">{{companydata.Descriptionofmaindivision}}</td>
+			 </tr>
+		 </table>
+
+	 </div>
+
+  {% endif %}
+
+    <div id="chargesRegistered" name="chargesRegistered"><br>
+		  <div style="color:#6C3B85;font-size:18px;">Charges</div>
+		    <table class="result-forms" width="100%" id="resultTab5" name="resultTab5">
+			    <tr class="table-header">
+				    <th>Assets under charge</th>
+				    <th>Charge Amount</th>
+				    <th>Date of Creation</th>
+				    <th>Date of Modification</th>
+				    <th>Status</th>
+			    </tr>
+
+          {% for chrg in companydata.charges.all %}
+          <tr>
+            <td align="center">{{chrg.Assetsundercharge}}</td>
+            <td align="center">{{chrg.ChargeAmount}}</td>
+            <td align="center">{{chrg.DateofCreation}}</td>
+            <td align="center">{{chrg.DateofModification}}</td>
+            <td align="center">{{chrg.Status}}</td>
+          </tr>
+          {% endfor %}
+
+        </table>
+      </div>
+
+      <div id="signatories" name="signatories"><br>
+ 		     <div style="color:#6C3B85;font-size:18px;">Directors/Signatory Details</div>
+ 		       <table class="result-forms" width="100%" id="resultTab6" name="resultTab6">
+ 			       <tr class="table-header">
+ 					     <th>DIN/PAN</th>
+ 					     <th>Name</th>
+ 					     <th>Begin date</th>
+ 					     <th>End date</th>
+ 					     <th>Surrendered DIN</th>
+ 				     </tr>
+
+            {% for dire in companydata.directors.all %}
+            <tr>
+              <td align="center">{{dire.DIN}}</td>
+  					  <td align="center">{{dire.Name}}</td>
+  					  <td align="center">{{dire.Begindate}}</td>
+  					  <td align="center">{{dire.Enddate}}</td>
+  					  <td align="center">{{dire.SurrenderedDIN}}</td>
+  				  </tr>
+            {% endfor %}
+
+          </table>
+        </div>
+    </div>
+
+{% endblock %}

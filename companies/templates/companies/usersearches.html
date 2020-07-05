@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+{% load my_extras %}
+  <div class="container">
+    {% if allsearches %}
+      <h2>Your all recent searches</h2>
+      <ol>
+        {% for sear in allsearches %}
+          <h4><li><a href="{% url 'companies:companydetails' cin=sear.CIN uid=sear.id %}">{{ sear.CIN}}  :   {{ sear.create_date }}</a></li></h4>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <h2>No recent searches</h2>
+    {% endif %}
+  </div>
+{% endblock %}
