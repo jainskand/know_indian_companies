@@ -8,11 +8,14 @@ Created on Mon Jun 29 22:31:54 2020
 from bs4 import BeautifulSoup
 import requests
 from datetime import datetime
+from user_agents import getRandomUserAgent
+
+user_agent = getRandomUserAgent()
 def getDetails(cin):
     session = requests.session()
     variable2 = session.get(url="http://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do",
                        headers={"Host": "www.mca.gov.in",
-                                "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0",
+                                "User-Agent": user_agent ,
                                 "Referer": "http://www.mca.gov.in/"})
     #print(variable2)
     #print(session.cookies)
@@ -30,7 +33,7 @@ def getDetails(cin):
             'Upgrade-Insecure-Requests': '1',
             'Origin': 'http://www.mca.gov.in',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36',
+            'User-Agent': user_agent,
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             'Referer': 'http://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do',
             'Accept-Encoding': 'gzip, deflate',
