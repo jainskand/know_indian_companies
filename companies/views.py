@@ -21,7 +21,7 @@ def companyPage(request,cin,uid=None):
         if form.is_valid():
             sel = form.cleaned_data['previuos']
             c = get_object_or_404(CinModel, pk=sel)
-            print(sel,c)
+            #print(sel,c)
 
 
 
@@ -32,7 +32,7 @@ def companyPage(request,cin,uid=None):
         c=c.companySearched
     else:
         #get_object_or_404(CinModel, CIN=cin)
-        comlis = CinModel.objects.filter(CIN=cin).order_by('create_date')
+        comlis = CinModel.objects.filter(CIN=cin).order_by('-create_date')
         c = comlis[0]
         cc = UserSearches(CIN=cin,user=request.user,companySearched=c)
         cc.save()
@@ -69,10 +69,19 @@ def companySearchView(request):
         form = SearchCompanies(request.POST)
         if form.is_valid():
             cin = form.cleaned_data['CIN']
-            if len(CinModel.objects.filter(CIN=cin))==0:
+            lis = CinModel.objects.filter(CIN=cin).order_by('-create_date')
+            if len(lis)==0:
                 storedata(request,cin)
+            else:
+                if lis[0].isupdated()==False:
+                    msg = scrap.getalldata(cin)
+                    if msg!="success":
+                        raise Http404("Not able to Process !!!!!!!!!!!!")
+#fix me______________________
+                    storedata(request,cin)
+                    print('updating')
+
             print('working')
-            t=False
             return redirect('companies:companydetail',cin=cin)
     return render(request,'companies/search_page.html',{'form':form})
 

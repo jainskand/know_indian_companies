@@ -23,7 +23,7 @@ class CinModel(models.Model):
     def __str__(self):
         return self.CIN
     def isupdated(self):
-         return timezone.now() < self.create_date + timezone.timedelta(days=15)
+        return timezone.now() < self.create_date + timezone.timedelta(days=15)
 
 
 class CompanyDetail(models.Model):
