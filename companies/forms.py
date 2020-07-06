@@ -16,3 +16,8 @@ class SearchCompanies(forms.Form):
 
 class PreviousData(forms.Form):
     previuos = forms.ChoiceField()
+
+    def __init__(self, cin,*args, **kwargs):
+        super(PreviousData, self).__init__(*args, **kwargs)
+        d = CinModel.objects.filter(CIN=cin).order_by('create_date')
+        self.fields['previuos'].choices = [(i.id,i.create_date) for i in d]

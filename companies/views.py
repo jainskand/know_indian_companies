@@ -15,14 +15,17 @@ def companyPage(request,cin,uid=None):
 
     #cin=slug
     #c = get_object_or_404(CinModel, CIN=cin)
-    form = PreviousData()
+    form = PreviousData(cin=cin)
     if request.method=='POST':
-        form = PreviousData(request.POST)
+        form = PreviousData(cin,request.POST)
         if form.is_valid():
             sel = form.cleaned_data['previuos']
-            print(sel)
+            c = get_object_or_404(CinModel, pk=sel)
+            print(sel,c)
 
-    if uid!=None:
+
+
+    elif uid!=None:
         c = get_object_or_404(UserSearches, pk=uid)
         if c.user!=request.user:
             raise Http404("Not authenticated")
