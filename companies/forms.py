@@ -15,7 +15,7 @@ class SearchCompanies(forms.Form):
         return cin
 
 class PreviousData(forms.Form):
-    previuos = forms.ChoiceField()
+    previuos = forms.ChoiceField(label='Previous Data  :')
 
     def __init__(self, cin,*args, **kwargs):
         super(PreviousData, self).__init__(*args, **kwargs)

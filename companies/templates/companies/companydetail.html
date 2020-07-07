@@ -3,15 +3,21 @@
 
 {% block content %}
 {% load my_extras %}
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
+<div class="">
+  <form method="post" class='form-inline'>
 
-  <input type="submit" class="btn btn-default" >
-</form>
+    {% csrf_token %}
+
+    {% bootstrap_form form  %}
+
+    <input type="submit" class="btn btn-default" >
+
+  </form>
+</div>
+
   <div class="container">
     {% if type == "company" %}
-    <h1>{{companydata.CompanyName}}</h1>
+    <h1>{{companydata.CompanyName|upper}}</h1>
     <div id="companyMasterData" name="companyMasterData">
       <table class="table table-striped table-bordered">
 
@@ -21,7 +27,7 @@
         </tr>
         <tr>
           <td>Company Name</td>
-          <td>{{companydata.CompanyName}}</td>
+          <td>{{companydata.CompanyName|upper}}</td>
         </tr>
         <tr>
           <td>ROC Code</td>
@@ -101,7 +107,7 @@
 
     {% elif type == "llp" %}
     <div id="llpMasterData" name="llpMasterData">
-      <h1>{{companydata.LLPName}}</h1>
+      <h1>{{companydata.LLPName|upper}}</h1>
 	     <table class="table table-striped table-bordered">
 	        <tr>
               <td>LLPIN&nbsp;</td>
@@ -109,7 +115,7 @@
           </tr>
           <tr>
               <td>LLP Name</td>
-              <td>{{companydata.LLPName}}</td>
+              <td>{{companydata.LLPName|upper}}</td>
           </tr>
 	        <tr>
    		        <td>Number of Partners</td>
@@ -170,7 +176,7 @@
     {% elif type == "foreigncompany" %}
 
     <div id="foreignCompanyMasterData" name="foreignCompanyMasterData">
-        <h1>{{companydata.CompanyName}}</h1>
+        <h1>{{companydata.CompanyName|upper}}</h1>
         <table class="table table-striped table-bordered">
 	          <tr>
                <td>FCRN&nbsp;</td>
@@ -178,7 +184,7 @@
             </tr>
              <tr>
                <td>Company Name</td>
-               <td>{{companydata.CompanyName}}</td>
+               <td>{{companydata.CompanyName|upper}}</td>
             </tr>
 				     <tr>
 			 	       <td> Date of Incorporation</td>
