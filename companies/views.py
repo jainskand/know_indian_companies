@@ -54,7 +54,7 @@ def companyPage(request,cin,uid=None):
 
 class SeachesListView(LoginRequiredMixin,ListView):
     login_url = '/accounts/login/'
-    redirect_field_name = 'recentsearches'
+    redirect_field_name = 'companies/recentsearches'
 
     model = UserSearches
     context_object_name = 'allsearches'

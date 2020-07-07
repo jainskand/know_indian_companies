@@ -3,13 +3,27 @@
 
 {% block content %}
   <div class="container">
-    <h3>Enter CIN of Company</h3>
+    <h3>Enter CIN/FCRN/LLPIN of Company</h3>
     <form method="post">
       {% csrf_token %}
       {% bootstrap_form form %}
 
       <input type="submit" class="btn btn-default" >
     </form>
+  <br>
+  <br>
+  <div class="">
+    <ul>
+      <li>CIN is the short form of "Corporate Identity Number.</li>
+      <li>FCRN is the short form of "Foreign Company Registration Number".</li>
+      <li>LLPIN is the short form of "Limited Liability Partnership Identification Number".</li>
+    </ul>
+    <br>
+    <p>When acompany gets registered in India, be it an Indian Company or a Foreign Company having
+      a place of business in India, it is allotted witha unique code which consists of 21 alphanumeric
+      characters. This is known as ‘Corporate IdentityNumber’, which in short is denoted as ‘CIN’.</p>
+    <p>Example : CIN of TATA Industries Limited is U44003MH1945PLC004403</p>
 
+  </div>
   </div>
 {% endblock %}

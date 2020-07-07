@@ -1,4 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>index</h1>
+{% if user.is_authenticated %}
+  <div class="well well-sm">
+    <h2 class="text-center ">Welcome to <strong> Know Indian Companies App</strong></h2>
+    <h3 class="text-center ">You are now Logged in</h3>
+  </div>
+  <div class="jumbotron">
+  <h3>Here you can search Master Data of Company by just typing <strong>CIN/FCRN/LLPIN</strong> of Company</h3>
+  <br>
+  <h4>To search goto Search Company Page</h4>
+  <br>
+  <h4>To see all your recent searches goto Recent Page</h4>
+</div>
+{% else %}
+<div class="well well-sm">
+  <h2 class="text-center ">Welcome to <strong> Know Indian Companies App</strong></h2>
+  </div>
+  <br>
+  <div class="jumbotron">
+  <h3>Here you can search Master Data of Company by just typing <strong>CIN/FCRN/LLPIN</strong> of Company</h3>
+  <br>
+  <h4>Please Login to Search Companies Data</h4>
+
+  <h4>Register first, if you dont have a account</h4>
+</div>
+{% endif %}
 {% endblock %}

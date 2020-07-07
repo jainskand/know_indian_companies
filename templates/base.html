@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">-->
       <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Russo+One&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class='loader'>
 
@@ -29,7 +31,7 @@
           {% if user.is_authenticated %}
             <li><a href="{% url 'companies:searchpage' %}">Search Company</a></li>
           {% endif %}
-          <li><a href="#">About</a></li>
+          <li><a href="{% url 'about_page' %}">About</a></li>
           <!-- <li><a href="https://www.github.com">Github</a></li>
           <li><a href="https://www.linkedin.com/in/skand-jain-7847731a5/">Linkedin</a></li>-->
         </ul>
@@ -50,7 +52,7 @@
     <div class="content container">
       <div class="row">
         <div class="col-md-8">
-          <div class="">
+          <div class="container">
             {% block content %}
             {% endblock %}
           </div>

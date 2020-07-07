@@ -8,14 +8,14 @@ Created on Mon Jun 29 22:31:54 2020
 from bs4 import BeautifulSoup
 import requests
 from datetime import datetime
-from user_agents import getRandomUserAgent
+from . import user_agents
 
-user_agent = getRandomUserAgent()
+user_agent = user_agents.getRandomUserAgent()
 def getDetails(cin):
     session = requests.session()
     variable2 = session.get(url="http://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do",
                        headers={"Host": "www.mca.gov.in",
-                                "User-Agent": user_agent ,
+                                "User-Agent": user_agent,
                                 "Referer": "http://www.mca.gov.in/"})
     #print(variable2)
     #print(session.cookies)

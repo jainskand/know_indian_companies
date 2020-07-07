@@ -1,17 +1,22 @@
 from .models import UserSearches,CompanyDetail,Charges,Directors,CinModel
 from django import forms
 from . import scrap
-
+import re
 
 class SearchCompanies(forms.Form):
-    CIN = forms.CharField()
+    CIN = forms.CharField(label='CIN/FCRN/LLPIN :')
 
     def clean_CIN(self):
         cin=self.cleaned_data['CIN']
-        if len(CinModel.objects.filter(CIN=cin))==0:
-            msg = scrap.getalldata(cin)
-            if msg!="success":
-                raise forms.ValidationError(msg)
+        cin = cin.upper()
+        r=r"^[A-Z]{3}-[0-9]{4}$|^[F]{1}[0-9]{5}$|^[LU]{1}[0-9]{5}[A-Z]{2}[0-9]{4}[A-Z]{3}[0-9]{6}"
+        if re.match(r,cin)!=None:
+            if len(CinModel.objects.filter(CIN=cin))==0:
+                msg = scrap.getalldata(cin)
+                if msg!="success":
+                    raise forms.ValidationError(msg)
+        else:
+            raise forms.ValidationError('Enter Valid CIN/FCRN/LLPIN')
         return cin
 
 class PreviousData(forms.Form):
