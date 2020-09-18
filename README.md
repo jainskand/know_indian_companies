@@ -1,6 +1,7 @@
 # Know-Indian-Companies
 An app which retrieves any company’s information from ministry of corporate affairs site.
-
+## Software Requirements
+- Python 3.6 or higher
 ## Setup
 Clone repo
 ```bash
