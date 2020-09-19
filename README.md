@@ -1,5 +1,6 @@
 # Know-Indian-Companies
 An app which retrieves any company’s information from ministry of corporate affairs site.
+- Hosted on [Know Indian Companies](https://know-indian-companies.herokuapp.com/ "Know Indian Companies")
 ## Software Requirements
 - Python 3.6 or higher
 ## Setup
