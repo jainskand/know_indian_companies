@@ -9,19 +9,28 @@ from bs4 import BeautifulSoup
 import requests
 from datetime import datetime
 from . import user_agents
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
 
 user_agent = user_agents.getRandomUserAgent()
 def getDetails(cin):
-    session = requests.session()
-    variable2 = session.get(url="http://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do",
+    print('starting')
+    session = requests.Session()
+    retry = Retry(connect=3, backoff_factor=0.3,total=3)
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('http://', adapter)
+    #session.mount('https://', adapter)
+
+    variable2 = session.get(url="https://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do",
                        headers={"Host": "www.mca.gov.in",
                                 "User-Agent": user_agent,
-                                "Referer": "http://www.mca.gov.in/"})
-    #print(variable2)
+                                "Referer": "http://www.mca.gov.in/"}, timeout=1)
+    print('seddion',variable2)
     #print(session.cookies)
     if variable2.status_code!=200:
         return 'connection error'
-    url = "http://www.mca.gov.in/mcafoportal/companyLLPMasterData.do"
+    url = "https://www.mca.gov.in/mcafoportal/companyLLPMasterData.do"
     myobj = {'companyName': '','companyID': cin,
              'displayCaptcha': 'false',
              'userEnteredCaptch': ''}
@@ -35,18 +44,18 @@ def getDetails(cin):
             'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': user_agent,
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            'Referer': 'http://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do',
+            'Referer': 'https://www.mca.gov.in/mcafoportal/viewCompanyMasterData.do',
             'Accept-Encoding': 'gzip, deflate',
             'Accept-Language': 'en-US,en;q=0.9',
             }
 
     final_request = session.post(url=url,headers=header,data=myobj)
-
+    print(final_request.status_code,'fetched')
     if final_request.status_code!=200:
         return 'connection error'
     #print(final_request.text)
-    #f = open("myfile.txt", "w")
-    #f.write(final_request.text)
+    # with open('ht.html','wb') as f:
+    #     f.write(final_request.content)
     return(final_request.text)
     #print(session.cookies)
 
@@ -196,8 +205,8 @@ def getalldata(cin):
     #getDirectors()
 
 
-#getalldata('U01132WB1996PTC168244')
-#print(*getCharges(),sep='\n')
+# getalldata('U01132WB1996PTC168244')
+# print(getCharges())
 
 #print(CinNotFoundError['style'])
 #invalidCinError = soup.find("div", {"id": "alertmsg_overlay"})
